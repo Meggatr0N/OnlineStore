@@ -47,6 +47,8 @@ class  ProductInOrder(models.Model):
     product = models.ForeignKey(Product,  blank=True, null=True, default=None, on_delete=models.CASCADE)
     nmb = models.IntegerField(default=1)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    product_discount = models.IntegerField(default=0)
+    discount_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0) #price*nmb
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -61,12 +63,21 @@ class  ProductInOrder(models.Model):
 
 
     def save(self, *args, **kwargs):
+        product_discount = self.product.discount
+        self.product_discount = product_discount
         price_per_item = self.product.price
         self.price_per_item = price_per_item
+        discount_price = self.product.price_with_discount
+        self.discount_price = discount_price
         print(self.nmb)
-        self.total_price = int(self.nmb) * price_per_item
+
+        if product_discount != 0:
+            self.total_price = int(self.nmb) * discount_price
+        else:
+            self.total_price = int(self.nmb) * price_per_item
 
         super(ProductInOrder, self).save(*args, **kwargs)
+
 
 
 
@@ -104,7 +115,7 @@ class  ProductInBasket(models.Model):
 
     def save(self, *args, **kwargs):
         price_per_item = self.product.price
-        self.price_per_item = price_per_item
+        self.price_per_item = float(price_per_item)
         self.total_price = int(self.nmb) * price_per_item
 
         super(ProductInBasket, self).save(*args, **kwargs)

@@ -28,8 +28,16 @@ admin.site.register(Product, ProductAdmin)
 
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductImage._meta.fields]
+    list_filter = ('is_main', 'is_active', 'created', 'updated')
 
     class Meta:
         model = ProductImage
 
 admin.site.register(ProductImage, ProductImageAdmin)
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'product', 'created', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('name', 'email', 'body')
+admin.site.register(Comment, CommentAdmin)

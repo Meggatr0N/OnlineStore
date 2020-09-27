@@ -16,30 +16,34 @@
         Новые поступления
       </h1>
     </div>
-    <!-- <div class="col-lg-3" >
-      <div class="sidebar-offcanvas" id="sidebar">
-        <div class="list-group">
-          <a href="#" class="list-group-item active">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-          <a href="#" class="list-group-item">Link</a>
-        </div>
-      </div>
-    </div> -->
-    {% for product_image  in products_images  %}
-      {% include 'blog/product_item.html' %}
-    {% endfor %}
+
+
+
+
+    <p> len( {{products_images}} )</p>
+    <p> {{products_images|length }} </p>
+
+
+
+
+
+
+    <div class="">
+      {% for product_image in products_images reversed %}
+        <p> {{ product_image.product.id }} </p>
+        {% include 'blog/product_item.html' %}
+      {% endfor %}
+    </div>
+
+
+
+
   </div>
 </div>
 
 <div class="section section-delivery">
   <h3>Free shipping</h3>
+  <h2>Всего на сайте представлено {{products_images|length }} товаров</h2>
 </div>
 
 <div class="section section2">

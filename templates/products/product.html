@@ -4,87 +4,183 @@
 
 {% block content %}
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        {% for image_item in product.productimage_set.all %}
-        <div class="product-image-item">
-          <img src="{{ image_item.image.url }}" class="img-responsive" />
-        </div>
-        {% endfor %}
-      </div>
+    <div class="product-main-----without-css">
+      <div class="product-about-----without-css">
 
-      <div class="col-lg-6">
-        <h1 class="text-center">
-          {{ product.name }}
-        </h1>
-        <div class="">
-          <p>
-            Price: {{ product.price }}
-          </p>
+        <div class=""> <!-- название продукта -->
+          <div class="">
+            <h1 class="text">
+              {{ product.name }}
+            </h1>
+          </div>
+          <div class="">
+            <h5 class="text-right">
+              Код товара (ID):  {{ product.id }}
+            </h5>
+          </div>
         </div>
 
 
-        <div>
+        <div class=""> <!-- слайдер продукта : все о товаре описание и тд -->
+          <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#about_product" aria-controls="about_product" role="tab" data-toggle="tab">
+                  Все о товаре
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#description" aria-controls="description" role="tab" data-toggle="tab">
+                  Описание
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#products_comments" aria-controls="products_comments" role="tab" data-toggle="tab">
+                  Отзывы
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                  заготовка 1
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
+                  заготовка 2
+                </a>
+              </li>
+            </ul>
 
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
-              <a href="#description" aria-controls="home" role="tab" data-toggle="tab">
-                Описание
-              </a>
-            </li>
-            <li role="presentation">
-              <a href="#delivery" aria-controls="profile" role="tab" data-toggle="tab">
-                Доставка
-              </a>
-            </li>
-            <li role="presentation">
-              <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
-                Messages
-              </a>
-            </li>
-            <li role="presentation">
-              <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
-                Settings
-              </a>
-            </li>
-          </ul>
+            <!-- Tab panes -->
+            <div class="tab-content product-description-tabs">
+              <div role="tabpanel" class="tab-pane active" id="about_product">
+                <div class="row">
 
-          <!-- Tab panes -->
-          <div class="tab-content product-description-tabs">
-            <div role="tabpanel" class="tab-pane active" id="description">
-              {{ product.description }}
+                  <div class="col-lg-6">
+                    {% if product.productimage_set.all|length_is:"1" %}
+                      {% for image_item in product.productimage_set.all %}
+                        <div class="slider__item">
+                          <div class="product-image-item">
+                            <img src="{{ image_item.image.url }}" class="img-responsive" />
+                          </div>
+                        </div>
+                      {% endfor %}
+                    {% else %}
+                      <div class="slider">
+                        <div class="slider__wrapper">
+                          <div class="slider__items">
+                              {% for image_item in product.productimage_set.all %}
+                                <div class="slider__item">
+                                  <div class="product-image-item">
+                                    <img src="{{ image_item.image.url }}" class="img-responsive" />
+                                  </div>
+                                </div>
+                              {% endfor %}
+                          </div>
+                        </div>
+                        <a class="slider__control slider__control_prev" href="#" role="button"></a>
+                        <a class="slider__control slider__control_next" href="#" role="button"></a>
+                      </div>
+
+                    {% endif %}
+                  </div>
+
+
+
+
+                  <div class="col-lg-6">
+                    <div class="">
+                      <p>
+                        Price: {{ product.price }}
+                      </p>
+                    </div>
+
+                    <div>
+                      <form class="form-inline" id="form_buying_product" action="{% url 'basket_adding' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <input type="number" min="1" max="10" step="1" class="form-control" name="number" id="number"/>
+                        </div>
+
+                        <div class="form-group" >
+                          <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
+                            data-product_id = "{{ product.id }}"
+                            data-name = "{{ product.name }}"
+                            data-price= "{{ product.price }}"
+                          >
+                            Купить
+                          </button>
+                        </div>
+
+                      </form>
+                    </div>
+
+
+                    <div class="">
+                      <h4>написать что-то по delivery. Как мы делаем доставку</h4>
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="description">
+                <h3>тут должно быть окно с описанием товара, его основных характеристик</h3>
+                {{ product.description }}
+              </div>
+              <div role="tabpanel" class="tab-pane" id="products_comments">
+                <h3>тут должно быть окно с отзывами</h3>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="messages">...</div>
+              <div role="tabpanel" class="tab-pane" id="settings">...</div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="delivery">
-              <h3>Как мы делаем доставку</h3>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="messages">...</div>
-            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+
           </div>
 
         </div>
 
-        <div>
-          <form class="form-inline" id="form_buying_product" action="{% url 'basket_adding' %}"> {% csrf_token %}
-            <div class="form-group">
-              <input type="number" min="1" max="10" step="1" class="form-control" name="number" id="number"/>
-            </div>
 
-            <div class="form-group" >
-              <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
-                data-product_id = "{{ product.id }}"
-                data-name = "{{ product.name }}"
-                data-price= "{{ product.price }}"
-              >
-                Купить
-              </button>
-            </div>
 
-          </form>
+
+
+        <div class="row">
+          <div class="col-lg-2-11" style="padding-top:50px;">
+            <h4>Просто текст для заполнения</h4>
+            <p>
+              Товарищи! начало повседневной работы по формированию позиции требуют определения и уточнения форм развития. Не следует, однако забывать, что укрепление и развитие структуры требуют определения и уточнения новых предложений.<br><br>
+
+              Таким образом начало повседневной работы по формированию позиции требуют от нас анализа модели развития. Товарищи! дальнейшее развитие различных форм деятельности играет важную роль в формировании соответствующий условий активизации.<br><br>
+
+              Равным образом новая модель организационной деятельности требуют от нас анализа направлений прогрессивного развития. Товарищи! начало повседневной работы по формированию позиции требуют определения и уточнения новых предложений. Задача организации, в особенности же начало повседневной работы по формированию позиции в значительной степени обуславливает создание модели развития. Равным образом сложившаяся структура организации влечет за собой процесс внедрения и модернизации систем массового участия. Таким образом постоянный количественный рост и сфера нашей активности способствует подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач.<br><br>
+
+              Таким образом реализация намеченных плановых заданий обеспечивает широкому кругу (специалистов) участие в формировании новых предложений. Разнообразный и богатый опыт сложившаяся структура организации играет важную роль в формировании системы обучения кадров, соответствует насущным потребностям. Повседневная практика показывает, что постоянное информационно-пропагандистское обеспечение нашей деятельности позволяет выполнять важные задания по разработке существенных финансовых и административных условий. С другой стороны реализация намеченных плановых заданий играет важную роль в формировании форм развития.<br><br>
+
+              Равным образом дальнейшее развитие различных форм деятельности требуют от нас анализа позиций, занимаемых участниками в отношении поставленных задач. Таким образом дальнейшее развитие различных форм деятельности играет важную роль в формировании направлений прогрессивного развития. Повседневная практика показывает, что дальнейшее развитие различных форм деятельности влечет за собой процесс внедрения и модернизации направлений прогрессивного развития.<br><br>
+            </p>
+
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="text-center">
+              Кофе в зернах
+            </h1>
+          </div>
+          {% for product_image  in products_images_kofe_v_zernah  %}
+            {% include 'blog/product_item.html' %}
+          {% endfor %}
         </div>
 
       </div>
+
     </div>
+
+
 
   </div>
 

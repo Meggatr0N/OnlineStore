@@ -3,5 +3,5 @@ from .models import *
 
 
 class CheckoutContactForm(forms.Form):
-    name = forms.CharField(required=True)
-    phone = forms.CharField(required=True)
+    name = forms.CharField(max_length=25, required=True)
+    phone = forms.CharField(max_length=25, required=True)
