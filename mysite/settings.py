@@ -25,7 +25,7 @@ SECRET_KEY = 'mdieq)*+s-n@^u9&kfsy8__-nxrdz64=oi-piy*aneh&*_j$v6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'megatrowka.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 
 # Application definition
@@ -126,12 +126,12 @@ USE_TZ = True
 
 
 #для запуска на локальном сервере
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
-STATIC_URL = '/static/'
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
+#STATIC_URL = '/static/'
 
 #для запуска на pythonanywhere.com
-#STATIC_URL = '/static/'
-#STATIC_ROOT = "/home/Megatrowka/megatrowka.pythonanywhere.com/static" #проканало для запуска на pythonanywhere
+STATIC_URL = '/static/'
+STATIC_ROOT = "/home/Megatrowka/megatrowka.pythonanywhere.com/static" #проканало для запуска на pythonanywhere
 
 #всякое на всякий
 #STATIC_ROOT = "/home/Megatrowka/mydjangoproject/static"
