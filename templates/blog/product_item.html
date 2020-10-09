@@ -23,7 +23,7 @@
 
 
       <div class="add-to-cart-btn">
-        {% if product_image.product.discount %}
+        {% if product_image.product.discount != 0 %}
           <div class="">
             <div class="">
               <h5>
@@ -31,6 +31,7 @@
                 <span class="tile__price-currency"> ₴ </span>
               </h5>
             </div>
+
             <div class="">
               <h4>
                 {{ product_image.product.price_with_discount}}
@@ -43,6 +44,7 @@
             <div class="invisible">
               <p>Empty space</p>
             </div>
+
             <div class="">
               <h4>
                 {{ product_image.product.price}}

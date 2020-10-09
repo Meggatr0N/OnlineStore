@@ -15,13 +15,9 @@ Including another URLconf
 """
 
 from django.urls import path
-from products import views
+from . import views
 
 urlpatterns = [
-    path('product/<int:product_id>', views.product, name='product')
-    #path('', views.blog, name='blog'),
-    #path('post/<int:pk>/', views.post_detail, name='post_detail'),
-    #path('post/new/', views.post_new, name='post_new'),
-    #path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
-    #path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
+    path('product/<int:product_id>', views.product, name='product'),
+
 ]

@@ -17,8 +17,23 @@ def blog(request):
     return render(request, 'blog/base.html', {'form': form})
 
 
+
 def home(request):
-    products_images = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active = True)
-    products_images_kofe_v_zernah = products_images.filter(product__category__id=1)
-    products_images_kofe_v_kapsulah = products_images.filter(product__category__id=2)
-    return render(request, 'blog/home.html', locals())
+    all_products = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active = True)
+    category_kofe_v_zernah = all_products.filter(product__category__id=1)
+    category_kofe_v_kapsulah = all_products.filter(product__category__id=2)
+
+    all_products_last_add = all_products.order_by("-id")[:4]
+    category_kofe_v_zernah_last_add = category_kofe_v_zernah.order_by("-id")[:4]
+    category_kofe_v_kapsulah_last_add = category_kofe_v_kapsulah.order_by("-id")[:4]
+
+    return render(request, 'blog/home.html', {
+        'all_products' : all_products,
+        'all_products_last_add' : all_products_last_add,
+        'category_kofe_v_zernah_last_add' : category_kofe_v_zernah_last_add,
+        'category_kofe_v_kapsulah_last_add' : category_kofe_v_kapsulah_last_add,
+    })
+
+
+def about(request):
+    return render(request, 'blog/about.html', locals())

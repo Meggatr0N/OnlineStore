@@ -1,6 +1,6 @@
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-top">
-  sdgdfsg
+  <p class="text-right">Copyright © LaCava 2020  Все права защищены</p>
 </nav>
 <nav class="navbar navbar-default navbar-main">
   <div class="container" >
@@ -11,14 +11,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">LaCava</a>
+      <a class="navbar-brand" href="/">LaCava</a>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Главная</a></li>
-        <li><a href="#">About</a></li>
-        <!--     <li><a href="#">Contact</a></li>     -->
+        <li class="active"><a href="/about/">About Creator</a></li>
         <li><a href="/checkout/">Ссылка на корзину</a></li>
+
+        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Кнопка чисто что б не потерять <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -31,6 +32,7 @@
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
+        -->
       </ul>
 
 
@@ -56,7 +58,9 @@
                   {% endfor %}
               </ul>
               <div class="text-center">
-                <a class="btn btn-secondary" href="/checkout/" role="button">Перейти в корзину</a>
+                <a class="btn btn-secondary" href="/checkout/" role="button">
+                  Перейти в корзину
+                </a>
               </div>
             {% else %}
             <div class="form-inline text-center">

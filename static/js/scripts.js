@@ -6,6 +6,11 @@ $(document).ready(function () {
     var data = {};
     data.product_id = product_id;
 
+
+    console.log("product_id is " + nmb);
+    console.log(nmb);
+
+
     if (nmb){
       data.nmb = nmb;
     } else {
@@ -52,23 +57,38 @@ $(document).ready(function () {
 
 
 
-  form.on('submit',function (e) {
+  //form.on('submit',function (e) {
+  //  e.preventDefault();
+  //  var form = $(this);
+  //  var nmb = $('#number').val();
+  //  //console.log(nmb);
+  //  var submit_btn = $('#submit_btn');
+  //  var product_id = submit_btn.data("product_id");
+  //  var name = submit_btn.data("name");
+  //  //console.log(product_id);
+  //  //console.log(name);
+  //  var price = submit_btn.data("price");
+  //  //console.log(price);
+//
+//
+  //  basketUpdating(product_id, nmb, is_delete=false)
+//
+  //});
+
+  form.on('submit',function(e){
     e.preventDefault();
     var form = $(this);
     var nmb = $('#number').val();
-    //console.log(nmb);
-    var submit_btn = $('#submit_btn');
+    var submit_btn = form.find($('#submit_btn'));
     var product_id = submit_btn.data("product_id");
-    var name = submit_btn.data("name");
-    //console.log(product_id);
-    //console.log(name);
-    var price = submit_btn.data("price");
-    //console.log(price);
-
+    var product_name = submit_btn.data("name")
+    var product_price = submit_btn.data("price")
 
     basketUpdating(product_id, nmb, is_delete=false)
-
   });
+
+
+
 
 
 

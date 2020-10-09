@@ -72,10 +72,11 @@ class  ProductInOrder(models.Model):
         print(self.nmb)
 
         if product_discount != 0:
-            self.total_price = int(self.nmb) * discount_price
+            total_price = int(self.nmb) * discount_price
         else:
-            self.total_price = int(self.nmb) * price_per_item
+            total_price = int(self.nmb) * price_per_item
 
+        self.total_price = total_price
         super(ProductInOrder, self).save(*args, **kwargs)
 
 
@@ -114,7 +115,11 @@ class  ProductInBasket(models.Model):
         verbose_name_plural = "Товары в корзине"
 
     def save(self, *args, **kwargs):
-        price_per_item = self.product.price
+        if self.product.discount != 0 :
+            price_per_item = self.product.price_with_discount
+        else:
+            price_per_item = self.product.price
+
         self.price_per_item = float(price_per_item)
         self.total_price = int(self.nmb) * price_per_item
 

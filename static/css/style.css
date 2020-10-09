@@ -7,8 +7,13 @@ html, body{
     margin: 0 auto;
 }
 
+
 .navbar{
     margin-bottom: 0;
+}
+
+.navbar-top {
+  padding: 0px 20px;
 }
 
 .wrapper{
@@ -87,6 +92,10 @@ html, body{
 
 
 
+
+
+
+
 .add-to-cart-btn {
     position: absolute;
     bottom: 15px;
@@ -108,10 +117,20 @@ html, body{
 }
 
 .section-delivery{
-    height: 300px;
     background-color: #62d2a2;
     text-align: center;
     color: white;
+}
+
+.section-delivery div{
+  display: inline-block;
+  padding: 0px 30px;
+  vertical-align: middle;
+}
+
+.free-shipping-image {
+  height: 200px;
+  width: auto;
 }
 
 .product-image-item{
@@ -139,6 +158,14 @@ html, body{
     color: red;
 }
 
+.about div{
+  vertical-align: middle;
+}
+
+
+
+
+
 
 
 
@@ -164,7 +191,6 @@ content: none;
     z-index: 10;
     padding: 10px;
 }
-
 
 
 
