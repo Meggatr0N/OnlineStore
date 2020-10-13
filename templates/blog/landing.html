@@ -1,115 +1,92 @@
-<!DOCTYPE html>
+{% extends 'base.html'%}
 {% load static %}
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Arti's shop</title>
-    <!-- Bootstrap-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,700|Varela+Round" rel="stylesheet">
 
-    <!-- Custom styles -->
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% block content %}
 
-  </head>
+<div>
+  <div>
+    <a href="/">
+      <img src="static/images/main_logo.png" alt="main_logo" width="65">
+    </a>
 
-  <body>
-    <div class="container">
-      <header class="page-header">
-        <h1>welcome to my coffee store</h1>
-      </header>
-
-      <nav>
-        <div class="peaces_of_nav">
-          <a href="/">
-            <img src="static/images/main_logo.png" alt="main_logo" width="65">
-          </a>
-          <div class="nav_catalog" href="#">
-            <svg class="catalog" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M5 8a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7A.5.5 0 015 8zm0-2.5a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7a.5.5 0 01-.5-.5zm0 5a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-              <circle cx="3.5" cy="5.5" r=".5"/>
-              <circle cx="3.5" cy="8" r=".5"/>
-              <circle cx="3.5" cy="10.5" r=".5"/>
-            </svg>
-            <span class="text">&#8194;Каталог</span>
-            <div class="nav_catalog_content">
-              <ul>
-                <li><a href="#home">Что нибудь 1</a></li>
-                <li><a href="#home">Что нибудь 2</a></li>
-                <li><a href="#home">Что нибудь 3</a></li>
-                <li><a href="#home">Что нибудь 4</a></li>
-                <li><a href="#home">Что нибудь 5</a></li>
-                <li><a href="#home">Что нибудь 6</a></li>
-                <li><a href="#home">Что нибудь 7</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="peaces_of_nav">
-          <button class="basket">
-            <a href="#">
-              <svg class="basket" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4.646 8.146a.5.5 0 01.708 0L8 10.793l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z" clip-rule="evenodd"/>
-                <path fill-rule="evenodd" d="M8 1a.5.5 0 01.5.5v9a.5.5 0 01-1 0v-9A.5.5 0 018 1z" clip-rule="evenodd"/>
-                <path fill-rule="evenodd" d="M1.5 13.5A1.5 1.5 0 003 15h10a1.5 1.5 0 001.5-1.5v-8A1.5 1.5 0 0013 4h-1.5a.5.5 0 000 1H13a.5.5 0 01.5.5v8a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5v-8A.5.5 0 013 5h1.5a.5.5 0 000-1H3a1.5 1.5 0 00-1.5 1.5v8z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text">&#8194;Корзина</span>
-            </a>
-          </button>
-          <button class="login">
-            <a href="#">
-              <svg class="login" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text">&#8194;Войти</span>
-            </a>
-          </button>
-        </div>
-      </nav>
-
-      <section class="catalog_of_products">
-        <div class="catalog_of_products_box">
-          <h2>catalog of products</h2>
-          <ul>
-            <li><a href="#home">Что нибудь 1</a></li>
-            <li><a href="#home">Что нибудь 2</a></li>
-            <li><a href="#home">Что нибудь 3</a></li>
-            <li><a href="#home">Что нибудь 4</a></li>
-            <li><a href="#home">Что нибудь 5</a></li>
-            <li><a href="#home">Что нибудь 6</a></li>
-            <li><a href="#home">Что нибудь 7</a></li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="window_with_products">
-        <h2> Товары </h2>
-
-        <div>
-          <form action="" method="post"> {% csrf_token %}
-            {{ form.as_p }}
-            <div>
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-        </div>
-
-
-
-        <div class="products_box">
-          <div class="products">
-            <button class = "btn btn-success">Ура, я подключил Bootstrap!</button>
-          </div>
-        </div>
-      </section>
-
-
-      <footer>
-        <h1>Footer</h1>
-      </footer>
-
+    <div class="nav_catalog" href="#">
+      <svg class="catalog" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
+        <path fill-rule="evenodd" d="M5 8a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7A.5.5 0 015 8zm0-2.5a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7a.5.5 0 01-.5-.5zm0 5a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+        <circle cx="3.5" cy="5.5" r=".5"/>
+        <circle cx="3.5" cy="8" r=".5"/>
+        <circle cx="3.5" cy="10.5" r=".5"/>
+      </svg>
+      <span class="text">&#8194;Каталог</span>
+      <div class="nav_catalog_content">
+        <ul>
+          <li><a href="#home">Что нибудь 1</a></li>
+          <li><a href="#home">Что нибудь 2</a></li>
+          <li><a href="#home">Что нибудь 3</a></li>
+          <li><a href="#home">Что нибудь 4</a></li>
+          <li><a href="#home">Что нибудь 5</a></li>
+          <li><a href="#home">Что нибудь 6</a></li>
+          <li><a href="#home">Что нибудь 7</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
+  <div class="peaces_of_nav">
+    <button class="basket">
+      <a href="#">
+        <svg class="basket" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4.646 8.146a.5.5 0 01.708 0L8 10.793l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M8 1a.5.5 0 01.5.5v9a.5.5 0 01-1 0v-9A.5.5 0 018 1z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M1.5 13.5A1.5 1.5 0 003 15h10a1.5 1.5 0 001.5-1.5v-8A1.5 1.5 0 0013 4h-1.5a.5.5 0 000 1H13a.5.5 0 01.5.5v8a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5v-8A.5.5 0 013 5h1.5a.5.5 0 000-1H3a1.5 1.5 0 00-1.5 1.5v8z" clip-rule="evenodd"/>
+        </svg>
+        <span class="text">&#8194;Корзина</span>
+      </a>
+    </button>
+    <button class="login">
+      <a href="#">
+        <svg class="login" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7 1.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm-2-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h4a.5.5 0 010 1h-4a.5.5 0 01-.5-.5zm2 9a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+        </svg>
+        <span class="text">&#8194;Войти</span>
+      </a>
+    </button>
+  </div>
+</div>
 
-  </body>
-</html>
+<section class="catalog_of_products">
+  <div class="catalog_of_products_box">
+    <h2>catalog of products</h2>
+    <ul>
+      <li><a href="#home">Что нибудь 1</a></li>
+      <li><a href="#home">Что нибудь 2</a></li>
+      <li><a href="#home">Что нибудь 3</a></li>
+      <li><a href="#home">Что нибудь 4</a></li>
+      <li><a href="#home">Что нибудь 5</a></li>
+      <li><a href="#home">Что нибудь 6</a></li>
+      <li><a href="#home">Что нибудь 7</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="window_with_products">
+  <h2> Товары </h2>
+
+  <div>
+    <form action="" method="post"> {% csrf_token %}
+      {{ form.as_p }}
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+
+
+  <div class="products_box">
+    <div class="products">
+      <button class = "btn btn-success">Ура, я подключил Bootstrap!</button>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

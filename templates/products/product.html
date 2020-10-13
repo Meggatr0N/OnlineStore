@@ -80,74 +80,95 @@
 
 
                   <div class="col-lg-6">
-                    {% if product.discount != 0 %}
-                      <div>
-                        <div>
-                          <h5>
-                            <del>{{ product.price }}</del>
-                            <span class="tile__price-currency"> ₴ </span>
-                          </h5>
-                        </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        {% if product.discount != 0 %}
+                          <div>
+                            <div>
+                              <h5>
+                                <del>{{ product.price }}</del>
+                                <span class="tile__price-currency"> ₴ </span>
+                              </h5>
+                            </div>
 
-                        <div>
-                          <h4>
-                            Price: {{ product.price_with_discount}}
-                            <span class=""> ₴ </span>
-                          </h4>
-                        </div>
+                            <div>
+                              <h4>
+                                Price: {{ product.price_with_discount}}
+                                <span class=""> ₴ </span>
+                              </h4>
+                            </div>
+                          </div>
+                        {% else %}
+                          <div>
+                            <div class="invisible">
+                              <p>Empty space</p>
+                            </div>
+
+                            <div>
+                              <h4>
+                                Price: {{ product.price}}
+                                <span> ₴ </span>
+                              </h4>
+                            </div>
+                          </div>
+                        {% endif %}
                       </div>
-                    {% else %}
-                      <div>
-                        <div class="invisible">
-                          <p>Empty space</p>
-                        </div>
 
-                        <div>
-                          <h4>
-                            Price: {{ product.price}}
-                            <span> ₴ </span>
-                          </h4>
-                        </div>
+                      <div class="col-lg-6">
+                        <form class="form-inline" id="form_buying_product" action="{% url 'basket_adding' %}">
+                          {% csrf_token %}
+                          <div class="form-group">
+                            <input type="number" min="1" max="10" step="1" class="form-control" name="number" id="number"/>
+                          </div>
+                          <div class="form-group" >
+                            {% if product.discount != 0 %}
+                              <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
+                                data-product_id = "{{ product.id }}"
+                                data-name = "{{ product.name }}"
+                                data-price= "{{ product.price_with_discount}}"
+                              >
+                                Купить
+                              </button>
+                            {% else %}
+                              <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
+                                data-product_id = "{{ product.id }}"
+                                data-name = "{{ product.name }}"
+                                data-price= "{{ product.price }}"
+                              >
+                                Купить
+                              </button>
+                            {% endif %}
+                          </div>
+
+                        </form>
                       </div>
-                    {% endif %}
-
-
-                    <div>
-                      <form class="form-inline" id="form_buying_product" action="{% url 'basket_adding' %}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                          <input type="number" min="1" max="10" step="1" class="form-control" name="number" id="number"/>
-                        </div>
-                        <div class="form-group" >
-                          {% if product.discount != 0 %}
-                            <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
-                              data-product_id = "{{ product.id }}"
-                              data-name = "{{ product.name }}"
-                              data-price= "{{ product.price_with_discount}}"
-                            >
-                              Купить
-                            </button>
-                          {% else %}
-                            <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
-                              data-product_id = "{{ product.id }}"
-                              data-name = "{{ product.name }}"
-                              data-price= "{{ product.price }}"
-                            >
-                              Купить
-                            </button>
-                          {% endif %}
-                        </div>
-
-                      </form>
                     </div>
 
-
-                    <div class="">
-                      <h4>написать что-то по delivery. Как мы делаем доставку</h4>
+                    <div class="panel panel-default">
+                      <div class="panel-heading"><b>Способы оплаты</b></div>
+                      <div class="panel-body">
+                        <ul>
+                          <li>банковская карта (Visa/Mastercard)</li>
+                          <li>наличный расчет курьеру при получении товара</li>
+                          <li>безналичная оплата с расчетного счета организации</li>
+                        </ul>
+                      </div>
                     </div>
 
+                    <div class="panel panel-default">
+                      <div class="panel-heading"><b>Стоимость доставки</b></div>
+                      <div class="panel-body">
+                        <ul>
+                          <li>Киев и Киевская область - 50грн</li>
+                          <li>Другие регионы - необходимо уточнить у нашего менеджера</li>
+                          <li>Самовывоз из Новой Почты - по тарифам перевозчика</li>
+                          <li>Курьер Новая почта - по тарифам перевозчика </li>
+                        </ul>
+                      </div>
+                    </div>
 
                   </div>
+
 
                 </div>
               </div>

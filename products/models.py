@@ -2,7 +2,8 @@ from django.db import models
 
 
 class ProductCategory(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None)
+    name = models.CharField(max_length=64, unique=True, blank=True, null=True, default=None, verbose_name='Категория')
+    slug = models.SlugField(verbose_name='Транслит', null=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
