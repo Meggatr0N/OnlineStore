@@ -32,7 +32,7 @@
               </li>
               <li role="presentation">
                 <a href="#description" aria-controls="description" role="tab" data-toggle="tab">
-                  Описание (может быть типа все о товаре вместе с описанием . а во вкладках отзывы и доставка )
+                  Характеристики
                 </a>
               </li>
               <li role="presentation">
@@ -47,7 +47,7 @@
               <div role="tabpanel" class="tab-pane active" id="about_product">
                 <div class="row">
 
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                     {% if product.productimage_set.all|length_is:"1" %}
                       {% for image_item in product.productimage_set.all %}
                         <div class="slider__item">
@@ -79,9 +79,9 @@
 
 
 
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         {% if product.discount != 0 %}
                           <div>
                             <div>
@@ -92,10 +92,7 @@
                             </div>
 
                             <div>
-                              <h4>
-                                Price: {{ product.price_with_discount}}
-                                <span class=""> ₴ </span>
-                              </h4>
+                              <h4>Price: {{ product.price_with_discount}} UAH</h4>
                             </div>
                           </div>
                         {% else %}
@@ -105,22 +102,24 @@
                             </div>
 
                             <div>
-                              <h4>
-                                Price: {{ product.price}}
-                                <span> ₴ </span>
-                              </h4>
+                              <h4>Price: {{ product.price}} UAH</h4>
                             </div>
                           </div>
                         {% endif %}
                       </div>
 
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 col-md-6 col-sm-6">
                         <form class="form-inline" id="form_buying_product" action="{% url 'basket_adding' %}">
                           {% csrf_token %}
+
                           <div class="form-group">
-                            <input type="number" min="1" max="10" step="1" class="form-control" name="number" id="number"/>
+                            <div class="input-number">
+                              <div class="button input-number__minus" onclick="this.nextElementSibling.stepDown()">-</div>
+                              <input class="input-number__input" type="number" min="1" max="69" value="1" id="number" readonly class="input-nmb-st">
+                              <div class="button input-number__plus" onclick="this.previousElementSibling.stepUp()">+</div>
+                            </div>
                           </div>
-                          <div class="form-group" >
+                          <div class="form-group">
                             {% if product.discount != 0 %}
                               <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
                                 data-product_id = "{{ product.id }}"
@@ -140,30 +139,48 @@
                             {% endif %}
                           </div>
 
+
                         </form>
                       </div>
                     </div>
 
-                    <div class="panel panel-default">
-                      <div class="panel-heading"><b>Способы оплаты</b></div>
-                      <div class="panel-body">
-                        <ul>
-                          <li>банковская карта (Visa/Mastercard)</li>
-                          <li>наличный расчет курьеру при получении товара</li>
-                          <li>безналичная оплата с расчетного счета организации</li>
-                        </ul>
-                      </div>
-                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="panel panel-default">
+                          <div class="panel-heading"><b>Способы оплаты</b></div>
+                          <div class="panel-body">
+                            <ul>
+                              <li>банковская карта (Visa/Mastercard)</li>
+                              <li>наличный/безналичный расчет курьеру при получении товара</li>
+                              <li>безналичная оплата с расчетного счета организации</li>
+                            </ul>
+                          </div>
+                        </div>
 
-                    <div class="panel panel-default">
-                      <div class="panel-heading"><b>Стоимость доставки</b></div>
-                      <div class="panel-body">
-                        <ul>
-                          <li>Киев и Киевская область - 50грн</li>
-                          <li>Другие регионы - необходимо уточнить у нашего менеджера</li>
-                          <li>Самовывоз из Новой Почты - по тарифам перевозчика</li>
-                          <li>Курьер Новая почта - по тарифам перевозчика </li>
-                        </ul>
+                        <div class="panel panel-default">
+                          <div class="panel-heading"><b>Стоимость доставки</b></div>
+                          <div class="panel-body">
+                            <ul>
+                              <li>Киев и Киевская область - 50грн</li>
+                              <li>БЕСПЛАТНАЯ ДОСТАВКА при заказе на 800 грн</li>
+                              <li>Забрать из пункта выдачи самостоятельно</li>
+                              <li>Другие регионы - необходимо уточнить у нашего менеджера</li>
+                              <li>Из Новой Почты - по тарифам перевозчика</li>
+                              <li>Курьер Новая почта - по тарифам перевозчика </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                          <div class="panel-heading"><b>Гарантия, Качество</b></div>
+                          <div class="panel-body">
+                            <ul>
+                              <li>Мы гарантируем соответствие товара.</li>
+                              <li>Обмен/возврат товара надлежащего качества без лишних вопросов в течении 14 дней</li>
+                              <li>Официальная гарантия от производителей</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -186,33 +203,11 @@
         </div>
 
 
-
-
-
-        <div class="row">
-          <div class="col-lg-12" style="padding-top:50px;">
-            <h4>Просто текст для заполнения</h4>
-            <p>
-              Товарищи! начало повседневной работы по формированию позиции требуют определения и уточнения форм развития. Не следует, однако забывать, что укрепление и развитие структуры требуют определения и уточнения новых предложений.<br><br>
-
-              Таким образом начало повседневной работы по формированию позиции требуют от нас анализа модели развития. Товарищи! дальнейшее развитие различных форм деятельности играет важную роль в формировании соответствующий условий активизации.<br><br>
-
-            </p>
-          </div>
-        </div>
-
-
-
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="text-center">
-              Также вас может заинтересовать
-            </h1>
-            <div>
-              {% for product_image  in product_suggestions  %}
-                {% include 'blog/product_item.html' %}
-              {% endfor %}
-            </div>
+            <h3>Описание товара:</h3>
+            {{ product.description }}
+            </p>
           </div>
         </div>
 
@@ -220,8 +215,22 @@
 
     </div>
 
-
-
   </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="text-center">
+        Также вас может заинтересовать
+      </h1>
+      <div>
+        {% for product_image  in product_suggestions  %}
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            {% include 'blog/product_item.html' %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
 
 {% endblock %}

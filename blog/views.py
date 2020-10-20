@@ -36,36 +36,4 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'blog/about.html', locals())
-
-
-
-#def category(request, slug):
-#    category = Category.objects.get(slug=slug)
-#    products_all = BlogPost.objects.filter(category=category)
-#    paginator = Paginator(post, 2)
-#    page = reguest.GET.get('page')
-#    try:
-#        products_all = paginator.page(page)
-#    except PageNotAnInteger:
-#        products_all = paginator.page(1)
-#    except EmptyPage:
-#        products_all = paginator.page(paginator.num_pages)
-#    return render(reguest, 'category.html', {
-#        'category': category,
-#        'page': page,
-#        'products_all': products_all,
-#    })
-
-
-
-def catalog(request):
-    categ_all = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active = True)
-    categ_v_zernah = categ_all.filter(product__category__id=1)
-    categ_v_kapsulah = categ_all.filter(product__category__id=2)
-
-    return render(request, 'blog/catalog.html', {
-        'categ_all' : categ_all,
-        'categ_v_zernah' : categ_v_zernah,
-        'categ_v_kapsulah' : categ_v_kapsulah,
-    })
+    return render(request, 'blog/about.html', {})

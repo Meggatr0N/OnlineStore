@@ -8,6 +8,7 @@ class ProductImageInline(admin.TabularInline):
 
 class ProductCategoryAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductCategory._meta.fields]
+    prepopulated_fields = {'slug': ('name',)}
 
     class Meta:
         model = ProductCategory

@@ -1,9 +1,10 @@
 from django.db import models
+from django.urls import reverse
 
 
 class ProductCategory(models.Model):
-    name = models.CharField(max_length=64, unique=True, blank=True, null=True, default=None, verbose_name='Категория')
-    slug = models.SlugField(verbose_name='Транслит', null=True)
+    name = models.CharField(max_length=64, db_index=True, unique=True, blank=False, null=True, default=None, verbose_name='Категория')
+    slug = models.SlugField(max_length=64, db_index=True, unique=True, blank=False, null=True, default=None, verbose_name='Транслит')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -13,13 +14,17 @@ class ProductCategory(models.Model):
         verbose_name = "Категория товара"
         verbose_name_plural = "Категория товаров"
 
+    def get_absolute_url(self):
+        return reverse('products:product_list_by_category', args=[self.slug])
+
 
 class Product(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None)
+    name = models.CharField(max_length=64, blank=False, null=True, default=None, db_index=True)
+    slug = models.SlugField(max_length=64, blank=False, null=True, default=None, db_index=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     discount = models.IntegerField(default=0)
     price_with_discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, blank=False, null=True, default=None)
     short_description = models.TextField(blank=True, null=True, default=None)
     description = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
@@ -43,6 +48,7 @@ class Product(models.Model):
 
         self.price_with_discount = price_with_discount
         super(Product, self).save(*args, **kwargs)  # Call the "real" save() method.
+
 
 
 

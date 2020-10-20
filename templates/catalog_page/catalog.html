@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="text-center">
+        {% if category %}
+          {{ category.name }}
+        {% else %}
+          Все товары представленые на сайте
+        {% endif %}
+      </h2>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="list-group list-group-catalog">
+        <a class="list-group-item active text-center">
+          Категории товаров:
+        </a>
+        <a href="{% url "products:catalog" %}" class="list-group-item {% if not category %}selected{% endif %}">Все продукты
+          <!--<span class="badge">{{categ_all|length}}</span>-->
+        </a>
+        {% for c in categories %}
+          <a href="{{ c.get_absolute_url }}" class="list-group-item {% if category.slug == c.slug %}class="selected"{% endif %}">{{ c.name }}
+            <!--<span class="badge">{{ products|length}}</span>-->
+          </a>
+          <!--
+          {% if c.slug == p.product.category.slug %}
+            {{c|length}}
+          {% endif %}
+          {% for p in products %}
+            {% if c.slug == p.product.category.slug %}
+              {{category}}
+            {% endif %}
+          {% endfor %}
+        -->
+
+        {% endfor %}
+      </div>
+
+    </div>
+
+
+    {% for product_image  in products %}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        {% include 'blog/product_item.html' %}
+      </div>
+    {% endfor %}
+
+
+  </div>
+
+
+  <!--
+  {% include "catalog_page/pagination.html" with page=catalog_products %}
+     -->
+
+{% endblock %}

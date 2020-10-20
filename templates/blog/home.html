@@ -17,13 +17,13 @@
       </h1>
       <h3 class="text-center">Всего на сайте представлено {{all_products|length }} товаров</h3>
     </div>
-
     <div>
       {% for product_image  in all_products_last_add %}
-        {% include 'blog/product_item.html' %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          {% include 'blog/product_item.html' %}
+        </div>
       {% endfor %}
     </div>
-
   </div>
 </div>
 
@@ -47,9 +47,13 @@
         Кофе в зернах (последние обновления в разделе)
       </h1>
     </div>
-    {% for product_image  in category_kofe_v_zernah_last_add  %}
-      {% include 'blog/product_item.html' %}
-    {% endfor %}
+    <div>
+      {% for product_image  in category_kofe_v_zernah_last_add  %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          {% include 'blog/product_item.html' %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
@@ -60,10 +64,34 @@
         Кофе в капсулах (последние обновления в разделе)
       </h1>
     </div>
-    {% for product_image in category_kofe_v_kapsulah_last_add  %}
-      {% include 'blog/product_item.html' %}
-    {% endfor %}
+    <div>
+      {% for product_image in category_kofe_v_kapsulah_last_add  %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          {% include 'blog/product_item.html' %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
+
+<div class="section section4">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="text-center">
+        Новые поступления
+      </h1>
+      <h3 class="text-center">Всего на сайте представлено {{all_products|length }} товаров</h3>
+    </div>
+
+    <div>
+      {% for product_image  in all_products_last_add %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          {% include 'blog/product_item.html' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}

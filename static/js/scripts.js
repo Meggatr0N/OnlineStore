@@ -7,8 +7,7 @@ $(document).ready(function () {
     data.product_id = product_id;
 
 
-    console.log("product_id is " + nmb);
-    console.log(nmb);
+    console.log("nmb:" + nmb);
 
 
     if (nmb){
@@ -28,8 +27,7 @@ $(document).ready(function () {
 
 
     var url = form.attr("action");
-
-    console.log(data)
+    console.log("data",  data)
     $.ajax({
       url: url,
       type: 'POST',
@@ -37,10 +35,10 @@ $(document).ready(function () {
       cache: true,
       success: function (data){
         console.log("OK");
-        console.log(data.products_total_nmb);
+        console.log("products_total_nmb",data.products_total_nmb);
         if (data.products_total_nmb || data.products_total_nmb == 0 ) {
-          $('#basket_total_nmb').text("(" + data.products_total_nmb + ")" );
-          console.log(data.products);
+          $('#basket_total_nmb').text( data.products_total_nmb );
+          console.log("data.products", data.products);
           $('.basket-items ul').html("");
           $.each(data.products, function (k, v) {
             $('.basket-items ul').append('<li>'+ v.name+ ', '+ v.nmb+ 'шт. '+ 'по '+ v.price_per_item + ' грн.   ' +
@@ -86,9 +84,6 @@ $(document).ready(function () {
 
     basketUpdating(product_id, nmb, is_delete=false)
   });
-
-
-
 
 
 

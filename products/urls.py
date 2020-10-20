@@ -17,7 +17,10 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    path('product/<int:product_id>', views.product, name='product'),
 
+app_name = 'products'
+urlpatterns = [
+    path('catalog/', views.catalog, name='catalog'),
+    path('category/<category_slug>/', views.catalog, name='product_list_by_category'),
+    path('category/<category_slug>/<int:product_id>/<product_slug>/', views.product, name='product'),
 ]

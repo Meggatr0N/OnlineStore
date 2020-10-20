@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-top">
   <p class="text-right">Copyright © LaCava 2020  Все права защищены</p>
@@ -39,49 +40,98 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown basket-container" >
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Корзина <span id="basket_total_nmb">
-            {% if products_total_nmb %}
-              ({{ products_total_nmb }})
-            {% else %}
-              (0)
-            {% endif %}
-          </span></a>
-          <div class="dropdown-menu basket-items">
-            {% if products_total_nmb != 0 %}
-              <ul>
-                  {% for product_in_basket in products_in_basket %}
-                    <li>
-                      {{ product_in_basket.product.name }}, {{ product_in_basket.nmb }} шт. {{ product_in_basket.total_price }} UAH
-                      <a class="glyphicon glyphicon-remove delete-item" href="" aria-hidden="true" data-product_id="{{ product_in_basket.id }}"></a>
-                    </li>
-                  {% endfor %}
-              </ul>
-              <div class="text-center">
-                <a class="btn btn-secondary" href="/checkout/" role="button">
-                  Перейти в корзину
-                </a>
+        {% if products_total_nmb %}
+          <li class="">
+            <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
+              Корзина
+              <span class="badge" id="basket_total_nmb">{{ products_total_nmb }}</span>
+            </a>
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <ul class="list-group">
+                    <li class="list-group-item active text-center"><h4>Корзина</h4></li>
+
+
+
+                    {% for product_in_basket in products_in_basket %}
+                      <li class="busket-list-item">
+
+                          <div class="busket-list-item-left-content">
+                            <div class="busket-list-item-left-content-img">
+                              <!--
+                              id={{ product_in_basket.product.id }}
+                              img={{ products_in_basket_img  }}
+                              {% for i in products_in_basket_img %}
+                                {{i}}
+                              {% endfor %}
+                              {{ products_in_basket.product_image.image.url }}
+                              -->
+                              <img src="{{ product_img_url }}" class="basket-image"/>
+
+                              <img src="{% static 'images/no-image-available.jpg'%} " class="basket-image" />
+                            </div>
+
+                            <div class="busket-list-item-left-content-text">
+                              <div class="">
+                                <h4 class="">{{ product_in_basket.product.name }}</h4>
+                              </div>
+                              <div class="text-right">
+                                <h4>
+                                  Количество: {{ product_in_basket.nmb }} шт. Сума: {{ product_in_basket.total_price }} UAH
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="busket-list-item-right-btn">
+                            <a class="glyphicon glyphicon-remove delete-item btn btn-default" aria-hidden="true" data-product_id="{{ product_in_basket.id }}"></a>
+                          </div>
+                      </li>
+                    {% endfor %}
+
+
+
+
+
+                  </ul>
+
+                  <div class="text-center">
+                    <a class="btn btn-default btn-success" href="/checkout/" type="button" >
+                      Оформить заказ
+                    </a>
+                  </div>
+                </div>
               </div>
-            {% else %}
-            <div class="form-inline text-center">
-              <div class="form-group">
-                <h4 class="text-center">
-                  Ваша корзина пуста &nbsp;
-                </h4>
-              </div>
-              <div class="form-group">
-                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-emoji-frown" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path fill-rule="evenodd" d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683z"/>
-                <path d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
-                </svg>
-              </div>
-              <h4>Но это никогда не поздно исправить :)</h4>
-              <h4><a href="/checkout/">Ссылка на корзину</a></h4>
             </div>
-            {% endif %}
-          </div>
-        </li>
+          </li>
+        {% else %}
+          <li class="">
+            <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">
+              Корзина
+              <span class="badge" id="basket_total_nmb"> 0 </span>
+            </a>
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="form-inline text-center">
+                    <div class="form-group">
+                      <h2 class="text-center"><strong>Ваша корзина пуста</strong></h2>
+                      <img src="{% static 'images/empty-basket.png'%} " class="empty-basket-image" />
+                    </div>
+                    <div class="form-group">
+                      <h3><strong>Но это никогда не поздно исправить</strong>
+                        <img src="{% static 'images/smiling-face.png'%}" />
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
